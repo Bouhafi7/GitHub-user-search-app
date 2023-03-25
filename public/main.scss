@@ -1,0 +1,268 @@
+@use '../sass/helpers/mixins' as *;
+
+:root{
+    --bg-body: #f5f7ff;
+    --color-title: #000;
+    --bg-container: #fff;
+    --color-infos-note-active: #a5b4cd;
+    --color-infos-active: #4b6a9b;
+    --color-user: #6b82ff;
+    --toggle-color: #697c9a;
+    --toggle-color-hover: #004141;
+    --shadow: #e5e9f9;
+}
+
+[data-theme = "dark"]{
+    --bg-body: #141d2e;
+    --color-title: #fff;
+    --bg-container: #1e2b48;
+    --color-infos-note-active: #8f95a4;
+    --color-infos-active: #fff;
+    --color-user: #1b50f4;
+    --toggle-color: white;
+    --toggle-color-hover: #0079b0;
+    --shadow: #19243d;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Space Mono";
+}
+
+body{
+    background-color: var(--bg-body);
+    @include centering;
+}
+
+.loading{
+    @include loader;
+}
+
+.loading.active{
+    display: block;
+    @include centering;
+}
+
+.container{
+    margin: auto;
+    margin-top: 150px;
+    padding: 0 20px;
+    > div:first-child{
+        @include between;
+        color: var(--color-title);
+        font-size: 25px;
+        @include max-md{
+            h1{
+                font-size: 25px;
+            }
+        }
+        button {
+            @include toggleBtn;
+            color: var(--toggle-color);
+            &:hover{
+                color: var(--toggle-color-hover);
+            }
+        }
+        @include max-sm{
+            margin-bottom: 40px;
+        }
+    }
+    form {
+        @include between;
+        background-color: var(--bg-container);
+        padding: 5px;
+        border-radius: 6px;
+        position: relative;
+        margin-block: 20px;
+        box-shadow: 0px 4px 8px var(--shadow);
+        i{
+            @include centerY;
+            font-size: 18px;
+            left: 10px;
+            color: var(--color-user);
+        }
+        .search-input{
+            @include setUpInput;
+            color: var(--toggle-color);
+            &::placeholder {
+                color: var(--toggle-color);
+            }
+        }
+        button{
+            @include toggleBtn;
+            text-transform: capitalize;
+            letter-spacing: 0;
+            font-size: 16px;
+            color: white;
+            background-color: #0077ff;
+            border-radius: 8px;
+            padding: 8px 13px;
+            &:hover{
+                background-color: #0077ffc9;
+            }
+        }
+        .errMsg{
+            font-size: 12px;
+            width: 95px;
+            margin-right: 5px;
+            color: red;
+            letter-spacing: -0.5px;
+            display: none;
+        }
+    }
+    .profile{
+        background-color: var(--bg-container);
+        border-radius: 6px;
+        padding: 30px;
+        box-shadow: 0px 4px 8px var(--shadow);
+        > div:first-child{
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            @include max-sm{
+                gap: 10px;
+            }
+            @include mb{
+                flex-direction: column;
+            }
+            img {
+                width: 120px;
+                border-radius: 50%;
+            }
+            > div {
+                @include between;
+                width: 100%;
+                @include max-sm{
+                    flex-direction: column;
+                    width: fit-content;
+                }
+                @include mb{
+                    text-align: center;
+                }
+                > div:first-child {
+                    line-height: .5;
+                    margin-top: -30px;
+                    @include max-sm{
+                        margin: 0;
+                        margin-left: -40px;
+                    }
+                    @include mb{
+                        margin: 0;
+                    }
+                    .profile-name {
+                        font-size: 25px;
+                        margin: 0;
+                        margin-bottom: 20px;
+                        font-weight: 600;
+                        color: var(--color-title);
+                        @include max-sm{
+                            font-size: 20px;
+                        }
+                    }
+                    .username{
+                        color: var(--color-user);
+                    }
+                }
+                .joined-in {
+                    margin-bottom: 40px;
+                    color: var(--color-infos-note-active);
+                    @include max-sm{
+                        margin: 0;
+                        margin-top: 10px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        > div:last-child{
+            padding-left: 180px;
+            @include max-sm{
+                padding: 0;
+                padding-top: 20px;
+            }
+            .bio{
+                color: var(--toggle-color);
+                margin-bottom: 15px;
+            }
+            .status{
+                @include centerAround;
+                background-color: var(--bg-body);
+                border-radius: 6px;
+                padding: 20px;
+                flex-wrap: wrap;
+                color: var(--color-infos-note-active);
+                div {
+                    text-align: center;
+                    p {
+                        margin: 0;
+                        margin-bottom: 10px;
+                        font-size: 13px;
+                        color: var(--toggle-color);
+                        @include max-sm{
+                            font-size: 14px;
+                        }
+                    }
+                    div:last-child{
+                        color: var(--color-title);
+                        font-size: 25px;
+                        font-weight: 600;
+                    }
+                }
+            }
+            > div:last-child {
+                display: flex;
+                flex-wrap: wrap;
+                padding-block: 40px;
+                gap: 20px;
+                div {
+                    width: 48%;
+                    display: flex;
+                    align-items: center;
+                    color: var(--color-infos-active);
+                    gap: 15px;
+                    @include max-sm{
+                        width: 100%;
+                    }
+                    a, p{
+                        margin: 0;
+                        text-decoration: none;
+                        color: var(--color-infos-active);
+                    }
+                    .not-av{
+                        color: var(--color-infos-note-active);
+                        pointer-events: none;
+                    }
+                    a:hover{
+                        text-decoration: underline;
+                    }
+                    i {
+                        font-size: 25px;
+                        width: 30px;
+                    }
+                }
+                .not-av{
+                    color: var(--color-infos-note-active);
+                    pointer-events: none;
+                }
+            }
+        }
+        @include max-sm{
+            padding: 30px 15px;
+        }
+    }
+    @include mb {
+        padding: 0 10px;
+    }
+    @include sm{
+        width: 700px;
+    }
+    @include md{
+        width: 850px;
+    }
+    @include max-sm{
+        padding: 20px;
+        margin: 0;
+    }
+}
